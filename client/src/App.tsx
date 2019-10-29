@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import axios from "axios";
+import { Header, Icon, List } from "semantic-ui-react";
+import "./App.css";
+
+class App extends React.Component {
+  state = {
+    values: []
+  };
+
+  async componentDidMount() {
+    let response = await axios.get("http://localhost:5000/api/values");
+    this.setState({
+      values: response.data
+    });
+  }
+
+  render() {
+    let { values } = this.state;
+    return (
+      <div>
+        <Header as="h2" icon>
+          <Icon name="users" />
+          <Header.Content>Ebook</Header.Content>
+        </Header>
+        <List bulleted>
+          {values.map((value: any) => (
+            <List.Item key={value.id}>{value.name}</List.Item>
+          ))}
+        </List>
+      </div>
+    );
+  }
 }
 
 export default App;
