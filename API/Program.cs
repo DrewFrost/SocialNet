@@ -22,12 +22,11 @@ namespace API
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-
-
                 try
                 {
                     var context = services.GetRequiredService<DataContext>();
                     context.Database.Migrate();
+                    Seed.SeedData(context);
                 }
                 catch (Exception e)
                 {
