@@ -4,10 +4,10 @@ import { IActivity } from "../../../app/models/activity";
 
 interface IProps {
   activities: IActivity[];
-  selectViewActivity: (id: string) => void;
+  selectActivity: (id: string) => void;
 }
 
-const ActivityList: React.FC<IProps> = ({ activities, selectViewActivity }) => {
+const ActivityList: React.FC<IProps> = ({ activities, selectActivity }) => {
   return (
     <Segment clearing>
       <Item.Group divided>
@@ -24,7 +24,7 @@ const ActivityList: React.FC<IProps> = ({ activities, selectViewActivity }) => {
               </Item.Description>
               <Item.Extra>
                 <Button
-                  onClick={() => selectViewActivity(activity.id)}
+                  onClick={() => selectActivity(activity.id)}
                   floated="right"
                   content="View"
                   color="blue"
